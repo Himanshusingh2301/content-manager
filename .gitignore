@@ -7,8 +7,8 @@ server/node_modules/
 .env
 server/.env
 client/.env
+client/.env.production
 .env.local
-.env.production
 .env.*.local
 
 # Build output
