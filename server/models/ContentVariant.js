@@ -11,7 +11,7 @@ const contentVariantSchema = new mongoose.Schema(
     title: { type: String, required: true, trim: true },
     body: { type: String, required: true },
     isActive: { type: Boolean, default: false },
-    section: { type: mongoose.Schema.Types.ObjectId, ref: "Section", required: true },
+    section: { type: mongoose.Schema.Types.ObjectId, ref: "Section", required: true, index: true },
     createdBy: { type: String, default: "unknown" },
     editHistory: { type: [editHistorySchema], default: [] },
   },

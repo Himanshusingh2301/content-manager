@@ -15,12 +15,14 @@ router.post("/", protect, async (req, res) => {
   }
 });
 
-// GET single section with its variants
+// GET single section with its variants — parallel fetch
 router.get("/:id", protect, async (req, res) => {
   try {
-    const section = await Section.findById(req.params.id).populate("project", "name color");
+    const [section, variants] = await Promise.all([
+      Section.findById(req.params.id).populate("project", "name color").lean(),
+      ContentVariant.find({ section: req.params.id }).sort({ createdAt: -1 }).lean(),
+    ]);
     if (!section) return res.status(404).json({ message: "Section not found" });
-    const variants = await ContentVariant.find({ section: req.params.id }).sort({ createdAt: -1 });
     res.json({ section, variants });
   } catch (err) {
     res.status(500).json({ message: err.message });

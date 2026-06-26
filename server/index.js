@@ -27,7 +27,11 @@ app.use("/api/variants", require("./routes/variants"));
 app.get("/api/health", (_, res) => res.json({ status: "ok" }));
 
 mongoose
-  .connect(process.env.MONGODB_URI)
+  .connect(process.env.MONGODB_URI, {
+    maxPoolSize: 10,        // reuse connections instead of creating new ones
+    serverSelectionTimeoutMS: 5000,
+    socketTimeoutMS: 45000,
+  })
   .then(() => {
     console.log("MongoDB connected");
     app.listen(process.env.PORT || 5000, () =>
