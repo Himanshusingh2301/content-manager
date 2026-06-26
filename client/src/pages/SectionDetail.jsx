@@ -30,7 +30,7 @@ export default function SectionDetail() {
     setSubmitting(true);
     try {
       const res = await api.post("/variants", { ...newVariant, sectionId: id });
-      setVariants([res.data, ...variants]);
+      setVariants([...variants, res.data]);
       setNewVariant({ title: "", body: "" });
       setShowAddForm(false);
     } catch (err) {

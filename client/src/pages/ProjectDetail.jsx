@@ -29,7 +29,7 @@ export default function ProjectDetail() {
     setSubmitting(true);
     try {
       const res = await api.post("/sections", { ...form, projectId: id });
-      setSections([res.data, ...sections]);
+      setSections([...sections, res.data]);
       setForm({ name: "", description: "" });
       setShowForm(false);
     } catch (err) {

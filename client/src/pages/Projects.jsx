@@ -32,7 +32,7 @@ export default function Projects() {
     setSubmitting(true);
     try {
       const res = await api.post("/projects", form);
-      setProjects([res.data, ...projects]);
+      setProjects([...projects, res.data]);
       setForm({ name: "", description: "", color: COLORS[0] });
       setShowForm(false);
     } catch (err) {

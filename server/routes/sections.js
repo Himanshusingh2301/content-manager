@@ -20,7 +20,7 @@ router.get("/:id", protect, async (req, res) => {
   try {
     const [section, variants] = await Promise.all([
       Section.findById(req.params.id).populate("project", "name color").lean(),
-      ContentVariant.find({ section: req.params.id }).sort({ createdAt: -1 }).lean(),
+      ContentVariant.find({ section: req.params.id }).sort({ createdAt: 1 }).lean(),
     ]);
     if (!section) return res.status(404).json({ message: "Section not found" });
     res.json({ section, variants });

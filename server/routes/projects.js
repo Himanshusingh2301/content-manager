@@ -8,7 +8,7 @@ const { protect } = require("../middleware/auth");
 router.get("/", protect, async (req, res) => {
   try {
     const projects = await Project.aggregate([
-      { $sort: { createdAt: -1 } },
+      { $sort: { createdAt: 1 } },
       {
         $lookup: {
           from: "sections",
@@ -82,7 +82,7 @@ router.get("/:id", protect, async (req, res) => {
 
     const sections = await Section.aggregate([
       { $match: { project: project._id } },
-      { $sort: { createdAt: -1 } },
+      { $sort: { createdAt: 1 } },
       {
         $lookup: {
           from: "contentvariants",
