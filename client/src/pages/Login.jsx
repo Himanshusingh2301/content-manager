@@ -17,7 +17,7 @@ export default function Login() {
     setLoading(true);
     try {
       await login(form.username.trim(), form.password);
-      navigate("/projects");
+      navigate("/");
     } catch (err) {
       setError(err.response?.data?.message || "Wrong password or invalid username");
     } finally {

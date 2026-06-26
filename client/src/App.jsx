@@ -14,21 +14,20 @@ export default function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          {/* Redirect root to /projects (ProtectedRoute handles unauthenticated → /login) */}
-          <Route path="/" element={<Navigate to="/projects" replace />} />
+          {/* Root → Projects (if not logged in, ProtectedRoute sends to /login) */}
+          <Route path="/" element={<ProtectedRoute><Projects /></ProtectedRoute>} />
 
-          {/* Login only visible when NOT logged in */}
+          {/* Login — only when not authenticated */}
           <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
 
-          {/* Protected pages */}
-          <Route path="/projects" element={<ProtectedRoute><Projects /></ProtectedRoute>} />
+          {/* Project & section pages */}
           <Route path="/projects/:id" element={<ProtectedRoute><ProjectDetail /></ProtectedRoute>} />
           <Route path="/sections/:id" element={<ProtectedRoute><SectionDetail /></ProtectedRoute>} />
           <Route path="/sections/:id/compare" element={<ProtectedRoute><Compare /></ProtectedRoute>} />
           <Route path="/sections/:id/history/:variantId" element={<ProtectedRoute><History /></ProtectedRoute>} />
 
-          {/* Catch-all → projects */}
-          <Route path="*" element={<Navigate to="/projects" replace />} />
+          {/* Catch-all → root */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

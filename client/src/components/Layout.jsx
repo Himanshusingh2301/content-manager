@@ -44,10 +44,10 @@ export default function Layout({ children }) {
           <nav className="flex-1 px-4 py-5">
             <p className="text-xs font-bold text-gray-400 uppercase tracking-wider px-3 mb-2">Navigation</p>
             <Link
-              to="/projects"
+              to="/"
               onClick={() => setSidebarOpen(false)}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all
-                ${location.pathname.startsWith("/projects")
+                ${location.pathname === "/" || location.pathname.startsWith("/projects")
                   ? "bg-violet-600 text-white shadow-sm shadow-violet-200"
                   : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
                 }`}
